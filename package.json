@@ -1,6 +1,6 @@
 {
   "name": "dnsmasq-conf",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -21,7 +21,7 @@
   "scripts": {
     "test": "mocha",
     "hw": "git add -A && git commit -m 'oki'&&npm version patch -m patch&&git add -A && git commit --amend -C HEAD&& git push&&npm publish",
-"patch": "npm version patch -m patch&&git add -A && git commit --amend -C HEAD&& git push&&npm publish",
+    "patch": "npm version patch -m patch&&git add -A && git commit --amend -C HEAD&& git push&&npm publish",
     "ap-wlan0": "sudo node run/ap.js",
     "host-wlan0": "sudo node run/host.js",
     "link-wlan0": "sudo node run/link.js"
