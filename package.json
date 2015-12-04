@@ -1,0 +1,38 @@
+{
+  "name": "dnsmasq-conf",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^3.4.1",
+    "json-add": "0.0.1",
+    "output-file-sync": "^1.1.1",
+    "path-exists": "^2.1.0",
+    "promised-exec": "^1.0.1",
+    "verbo": "0.0.9"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4"
+  },
+  "scripts": {
+    "test": "mocha",
+    "hw": "git add -A && git commit -m 'oki'&&npm version patch -m patch&&git add -A && git commit --amend -C HEAD&& git push&&npm publish",
+"patch": "npm version patch -m patch&&git add -A && git commit --amend -C HEAD&& git push&&npm publish",
+    "ap-wlan0": "sudo node run/ap.js",
+    "host-wlan0": "sudo node run/host.js",
+    "link-wlan0": "sudo node run/link.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dottgonzo/dnsmasq-conf.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dottgonzo/dnsmasq-conf/issues"
+  }
+}
