@@ -36,8 +36,13 @@ function parsemasq(path,config){
 
 
 outputFileSync(path, write, 'utf-8');
-
+if(!config.test){
   return exec('systemctl restart dnsmasq');
+
+} else{
+  return exec('echo');
+
+}
 
 
 
@@ -47,6 +52,7 @@ function dnsMasq(options){
 
   var config={
     path:'/etc/dnsmasq.conf',
+    test:false,
     dhcp:{
       stop:10,
       start:3,
@@ -83,10 +89,12 @@ function dnsMasq(options){
       dns:config.dns,
       dhcp:config.dhcp,
       host:config.host,
+      test:config.test,
       interface:config.interface
     },
     link:{
       noresolv:true,
+      test:config.test,
       dhcp:config.dhcp,
       interface:config.interface,
       host:config.host,
@@ -94,6 +102,7 @@ function dnsMasq(options){
     },
     host:{
       noresolv:true,
+      test:config.test,
       dhcp:config.dhcp,
       host:config.host,
       interface:config.interface,
@@ -106,6 +115,7 @@ function dnsMasq(options){
 dnsMasq.prototype.setmode=function(mode){
 
   this.mode=mode;
+
 console.log(this.modes[mode])
   return parsemasq(this.path,this.modes[mode])
 

@@ -3,7 +3,7 @@ assert = require('chai').assert,
 fs = require('fs'),
 verb=require('verbo'),
 dnsMasq=require('../index');
-var myDns=new dnsMasq({path:'/tmp/dnsmasq.conf',interface:'wlan0'});
+var myDns=new dnsMasq({path:'/tmp/dnsmasq.conf',interface:'wlan0',test:true});
 
 verb(myDns)
 
