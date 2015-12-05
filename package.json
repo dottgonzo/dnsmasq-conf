@@ -16,10 +16,12 @@
   },
   "devDependencies": {
     "chai": "^3.4.1",
+    "chai-as-promised": "^5.1.0",
     "mocha": "^2.3.4"
   },
   "scripts": {
     "test": "mocha",
+    "prepublish": "npm test",
     "hw": "git add -A && git commit -m 'oki'&&npm version patch -m patch&&git add -A && git commit --amend -C HEAD&& git push&&npm publish",
     "patch": "npm version patch -m patch&&git add -A && git commit --amend -C HEAD&& git push&&npm publish",
     "ap-wlan0": "sudo node run/ap.js",
