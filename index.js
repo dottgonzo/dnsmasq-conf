@@ -94,6 +94,7 @@ function dnsMasq(options){
     },
     link:{
       noresolv:true,
+      dns:config.dns,
       test:config.test,
       dhcp:config.dhcp,
       interface:config.interface,
@@ -102,6 +103,7 @@ function dnsMasq(options){
     },
     host:{
       noresolv:true,
+      dns:config.dns,
       test:config.test,
       dhcp:config.dhcp,
       host:config.host,
