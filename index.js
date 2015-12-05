@@ -71,7 +71,7 @@ function dnsMasq(options){
     throw Error('No configuration file was founded')
   }
 
-  if(!config.host||config.host.split('.').length>4){
+  if(config.host.split('.').length>4){
     throw Error('Wrong host')
   }
 
