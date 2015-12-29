@@ -2,8 +2,9 @@ import * as pathExists from "path-exists";
 import * as fs from "fs";
 import merge = require("json-add");
 let exec = require('promised-exec');
-let outputFileSync = require('output-file-sync');
-
+let outputFileSync = function(file:string,content:any){
+    fs.writeFileSync(file,content)
+}
 interface ConfDnsm {
     path: string;
     interface: any;
@@ -43,7 +44,7 @@ interface Mode {
     host: string,
     test: boolean,
     interface: any,
-    address: any
+    address?: string
 }
 
 declare let config: ConfDnsm
@@ -93,7 +94,7 @@ function parsemasq(path: string, config: Mode) {
     }
 
 
-    outputFileSync(path, write, 'utf-8');
+    outputFileSync(path, write);
     if (!config.test) {
         return exec('systemctl restart dnsmasq');
 
@@ -140,8 +141,7 @@ let DMasq = class DNSMasq {
                 dhcp: config.dhcp,
                 host: config.host,
                 test: config.test,
-                interface: config.interface,
-                address: false
+                interface: config.interface
             },
             link: {
                 noresolv: true,
