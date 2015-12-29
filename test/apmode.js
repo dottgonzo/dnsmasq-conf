@@ -1,23 +1,22 @@
-var mocha = require('mocha'),
-assert = require('chai').assert,
-fs = require('fs'),
-verb=require('verbo'),
-DnsMasq=require('../index');
-var myDns=new DnsMasq({path:'/tmp/dnsmasq.conf',interface:'wlan0',test:true});
+var pathExists = require("path-exists");
+var mocha = require('mocha'), assert = require('chai').assert, fs = require('fs'), verb = require('verbo'), DnsMasq = require('../index');
+if (!pathExists.sync("/tmp/dnsmasq.conf")) {
+    fs.writeFileSync("/tmp/dnsmasq.conf", "", "utf-8");
+}
+var myDns = new DnsMasq({ path: '/tmp/dnsmasq.conf', interface: 'wlan0', test: true });
 myDns.setmode('ap');
-verb(myDns)
-
-describe('config', function() {
-  describe('check basic existence', function() {
-
-  it('must return something', function() {
-    assert.ok(myDns,'torna');
-  });
+verb(myDns);
+describe('config', function () {
+    describe('check basic existence', function () {
+        it('must return something', function () {
+            assert.ok(myDns, 'torna');
+        });
+    });
+    describe('check if is the object is equals to the file', function () {
+        it('read file', function () {
+            assert.ok(fs.readFileSync(myDns.path), 'object file');
+        });
+    });
 });
-describe('check if is the object is equals to the file', function() {
-  it('read file', function() {
-  assert.ok(fs.readFileSync(myDns.path), 'object file');
-  });
-});
 
-});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlc3QvYXBtb2RlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLElBQVksVUFBVSxXQUFNLGFBQWEsQ0FBQyxDQUFBO0FBQzFDLElBQUksS0FBSyxHQUFHLE9BQU8sQ0FBQyxPQUFPLENBQUMsRUFDNUIsTUFBTSxHQUFHLE9BQU8sQ0FBQyxNQUFNLENBQUMsQ0FBQyxNQUFNLEVBQy9CLEVBQUUsR0FBRyxPQUFPLENBQUMsSUFBSSxDQUFDLEVBQ2xCLElBQUksR0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLEVBQ3JCLE9BQU8sR0FBQyxPQUFPLENBQUMsVUFBVSxDQUFDLENBQUM7QUFDNUIsRUFBRSxDQUFBLENBQUMsQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLG1CQUFtQixDQUFDLENBQUMsQ0FBQSxDQUFDO0lBQ3RDLEVBQUUsQ0FBQyxhQUFhLENBQUMsbUJBQW1CLEVBQUMsRUFBRSxFQUFDLE9BQU8sQ0FBQyxDQUFBO0FBQ3BELENBQUM7QUFDRCxJQUFJLEtBQUssR0FBQyxJQUFJLE9BQU8sQ0FBQyxFQUFDLElBQUksRUFBQyxtQkFBbUIsRUFBQyxTQUFTLEVBQUMsT0FBTyxFQUFDLElBQUksRUFBQyxJQUFJLEVBQUMsQ0FBQyxDQUFDO0FBQzlFLEtBQUssQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDcEIsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFBO0FBRVgsUUFBUSxDQUFDLFFBQVEsRUFBRTtJQUNqQixRQUFRLENBQUMsdUJBQXVCLEVBQUU7UUFFbEMsRUFBRSxDQUFDLHVCQUF1QixFQUFFO1lBQzFCLE1BQU0sQ0FBQyxFQUFFLENBQUMsS0FBSyxFQUFDLE9BQU8sQ0FBQyxDQUFDO1FBQzNCLENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDSCxRQUFRLENBQUMsOENBQThDLEVBQUU7UUFDdkQsRUFBRSxDQUFDLFdBQVcsRUFBRTtZQUNoQixNQUFNLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxZQUFZLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxFQUFFLGFBQWEsQ0FBQyxDQUFDO1FBQ3RELENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQyxDQUFDLENBQUM7QUFFSCxDQUFDLENBQUMsQ0FBQyIsImZpbGUiOiJ0ZXN0L2FwbW9kZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCAqIGFzIHBhdGhFeGlzdHMgZnJvbSBcInBhdGgtZXhpc3RzXCI7XG52YXIgbW9jaGEgPSByZXF1aXJlKCdtb2NoYScpLFxuYXNzZXJ0ID0gcmVxdWlyZSgnY2hhaScpLmFzc2VydCxcbmZzID0gcmVxdWlyZSgnZnMnKSxcbnZlcmI9cmVxdWlyZSgndmVyYm8nKSxcbkRuc01hc3E9cmVxdWlyZSgnLi4vaW5kZXgnKTtcbmlmKCFwYXRoRXhpc3RzLnN5bmMoXCIvdG1wL2Ruc21hc3EuY29uZlwiKSl7XG4gICAgZnMud3JpdGVGaWxlU3luYyhcIi90bXAvZG5zbWFzcS5jb25mXCIsXCJcIixcInV0Zi04XCIpXG59XG52YXIgbXlEbnM9bmV3IERuc01hc3Eoe3BhdGg6Jy90bXAvZG5zbWFzcS5jb25mJyxpbnRlcmZhY2U6J3dsYW4wJyx0ZXN0OnRydWV9KTtcbm15RG5zLnNldG1vZGUoJ2FwJyk7XG52ZXJiKG15RG5zKVxuXG5kZXNjcmliZSgnY29uZmlnJywgZnVuY3Rpb24oKSB7XG4gIGRlc2NyaWJlKCdjaGVjayBiYXNpYyBleGlzdGVuY2UnLCBmdW5jdGlvbigpIHtcblxuICBpdCgnbXVzdCByZXR1cm4gc29tZXRoaW5nJywgZnVuY3Rpb24oKSB7XG4gICAgYXNzZXJ0Lm9rKG15RG5zLCd0b3JuYScpO1xuICB9KTtcbn0pO1xuZGVzY3JpYmUoJ2NoZWNrIGlmIGlzIHRoZSBvYmplY3QgaXMgZXF1YWxzIHRvIHRoZSBmaWxlJywgZnVuY3Rpb24oKSB7XG4gIGl0KCdyZWFkIGZpbGUnLCBmdW5jdGlvbigpIHtcbiAgYXNzZXJ0Lm9rKGZzLnJlYWRGaWxlU3luYyhteURucy5wYXRoKSwgJ29iamVjdCBmaWxlJyk7XG4gIH0pO1xufSk7XG5cbn0pOyJdLCJzb3VyY2VSb290IjoiL3NvdXJjZS8ifQ==
