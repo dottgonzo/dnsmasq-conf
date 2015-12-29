@@ -2,8 +2,8 @@ var mocha = require('mocha'),
 assert = require('chai').assert,
 fs = require('fs'),
 verb=require('verbo'),
-dnsMasq=require('../index');
-var myDns=new dnsMasq({path:'/tmp/dnsmasq.conf',interface:'wlan0',test:true});
+DnsMasq=require('../index');
+var myDns=new DnsMasq({path:'/tmp/dnsmasq.conf',interface:'wlan0',test:true});
 
 verb(myDns)
 
