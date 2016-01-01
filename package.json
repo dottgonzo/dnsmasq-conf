@@ -1,13 +1,12 @@
 {
   "name": "dnsmasq-conf",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
-    "chai": "^3.4.1",
     "json-add": "0.0.7",
     "path-exists": "^2.1.0",
     "promised-exec": "^1.0.1",
