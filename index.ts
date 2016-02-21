@@ -47,6 +47,9 @@ interface Mode {
     address?: string
 }
 
+
+
+
 declare let config: ConfDnsm
 config = {
     path: '/etc/dnsmasq.conf',
@@ -184,7 +187,7 @@ let DMasq = class DNSMasq implements ConfDnsm {
     }
 
 
-    setmode = function(mode:string) {
+    setmode(mode:string) {
 
         this.mode = mode;
 
@@ -193,20 +196,20 @@ let DMasq = class DNSMasq implements ConfDnsm {
 
 
     };
-    ap = function() {
+    ap() {
 
         this.mode = 'ap';
         return parsemasq(this.path, this.modes.ap)
 
     };
-    host = function() {
+    host() {
 
         this.mode = 'host';
         return parsemasq(this.path, this.modes.host)
 
     };
 
-    link = function() {
+    link() {
 
         this.mode = 'link';
         return parsemasq(this.path, this.modes.link)
