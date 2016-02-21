@@ -112,6 +112,8 @@ function parsemasq(path: string, config: Mode) {
 
 let DMasq = class DNSMasq {
     modes: Modes;
+    mode:string;
+    path:string;
     constructor(public options: OptDnsm) {
 
         if (options && typeof (options) == 'object') {
@@ -120,7 +122,9 @@ let DMasq = class DNSMasq {
 
         if (!pathExists.sync(config.path)) {
             throw Error('No configuration file was founded')
-        }
+        } 
+        
+        this.path=config.path;
 
         if (config.host.split('.').length > 4) {
             throw Error('Wrong host')
@@ -167,7 +171,7 @@ let DMasq = class DNSMasq {
     }
 
 
-    setmode = function(mode) {
+    setmode = function(mode:string) {
 
         this.mode = mode;
 

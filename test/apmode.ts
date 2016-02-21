@@ -2,12 +2,12 @@ import * as pathExists from "path-exists";
 var mocha = require('mocha'),
 assert = require('chai').assert,
 fs = require('fs'),
-verb=require('verbo'),
-DnsMasq=require('../index');
+verb=require('verbo');
+import DnsMasq=require('../index');
 if(!pathExists.sync("/tmp/dnsmasq.conf")){
     fs.writeFileSync("/tmp/dnsmasq.conf","","utf-8")
 }
-var myDns=new DnsMasq({path:'/tmp/dnsmasq.conf',interface:'wlan0',test:true});
+let myDns=new DnsMasq({path:'/tmp/dnsmasq.conf',interface:'wlan0',test:true});
 myDns.setmode('ap');
 verb(myDns)
 
