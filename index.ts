@@ -14,17 +14,17 @@ interface ConfDnsm {
         start: number;
         lease: string;
     };
-    mode: boolean;
+    mode?: string;
     dns: [string];
-    host: string;
+    hostIp: string;
 }
 interface OptDnsm {
     path?: string;
     interface: any;
     test?: boolean;
-    mode?: boolean;
+    mode?: string;
     dns?: [string];
-    host?: string;
+    hostIp?: string;
 }
 
 interface Modes {
@@ -41,7 +41,7 @@ interface Mode {
         start: number;
         lease: string;
     };
-    host: string,
+    hostIp: string,
     test: boolean,
     interface: any,
     address?: string
@@ -57,9 +57,8 @@ config = {
         start: 3,
         lease: '3h'
     },
-    mode: false,
     dns: ['8.8.8.8', '8.8.4.4'],
-    host: "192.99.0.1"
+    hostIp: "192.99.0.1"
 }
 
 
@@ -73,7 +72,7 @@ function parsemasq(path: string, config: Mode) {
     }
 
     if (config.dhcp) {
-        var root_address = config.host.split('.')[0] + '.' + config.host.split('.')[1] + '.' + config.host.split('.')[2]
+        var root_address = config.hostIp.split('.')[0] + '.' + config.hostIp.split('.')[1] + '.' + config.hostIp.split('.')[2]
         let startIp = root_address + '.' + config.dhcp.start;
         let stopIp = root_address + '.' + config.dhcp.stop;
 
@@ -110,10 +109,24 @@ function parsemasq(path: string, config: Mode) {
 
 
 
-let DMasq = class DNSMasq {
+let DMasq = class DNSMasq implements ConfDnsm {
     modes: Modes;
     mode:string;
     path:string;
+    
+
+    interface: any;
+    test: boolean;
+    dhcp: {
+        stop: number;
+        start: number;
+        lease: string;
+    };
+
+    dns: [string];
+    hostIp: string;
+    
+    
     constructor(public options: OptDnsm) {
 
         if (options && typeof (options) == 'object') {
@@ -126,7 +139,7 @@ let DMasq = class DNSMasq {
         
         this.path=config.path;
 
-        if (config.host.split('.').length > 4) {
+        if (config.hostIp.split('.').length > 4) {
             throw Error('Wrong host')
         }
 
@@ -143,7 +156,7 @@ let DMasq = class DNSMasq {
                 noresolv: true,
                 dns: config.dns,
                 dhcp: config.dhcp,
-                host: config.host,
+                hostIp: config.hostIp,
                 test: config.test,
                 interface: config.interface
             },
@@ -153,17 +166,17 @@ let DMasq = class DNSMasq {
                 test: config.test,
                 dhcp: config.dhcp,
                 interface: config.interface,
-                host: config.host,
-                address: '/#/' + config.host
+                hostIp: config.hostIp,
+                address: '/#/' + config.hostIp
             },
             host: {
                 noresolv: true,
                 dns: config.dns,
                 test: config.test,
                 dhcp: config.dhcp,
-                host: config.host,
+                hostIp: config.hostIp,
                 interface: config.interface,
-                address: '/#/' + config.host
+                address: '/#/' + config.hostIp
             }
         }
 
